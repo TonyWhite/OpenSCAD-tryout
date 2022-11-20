@@ -1,3 +1,7 @@
+/*
+Modular prism with fake blur. Very fake blur. Extremely fake blur.
+*/
+
 prism_sides=6;
 base_radius=1;
 prism_height=2;

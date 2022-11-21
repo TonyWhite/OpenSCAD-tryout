@@ -11,7 +11,12 @@ Simply test drawings
 ![Stone sculpture](Stone%20sculpture%20-%20render.png)
 
 ## Prism
+customizable
 ![Prism](Prism%20-%20render.png)
+
+## Roll a dice
+customizable
+![Roll_a_dice](Roll%20a%20dice%20-%20render.png)
 
 ## More models
 They will be available when I play with OpenSCAD again.

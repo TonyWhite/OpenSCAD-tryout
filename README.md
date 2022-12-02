@@ -5,7 +5,7 @@ Simply test drawings
 ![Genesa](Genesa%20-%20render.png)
 
 ## Google Drive - file details
-![GDrive-file_details](GDrive%20-%20file%20details%20-%20render.png)
+![Google-Drive-file_details](Google%20Drive%20-%20file%20details%20-%20render.png)
 
 ## Metal trash
 customizable

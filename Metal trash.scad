@@ -43,10 +43,11 @@ height: do you want a thread around a cone?
 degrees: default 1440 (4 turns)
 thread_diameter: is self-explanatory
 thread_fn: number of fragments in 360 degrees for thread
+thread_close: close the thread with a sphere (default false)
 clockwise: spiral direction (default true)
 $fn: number of fragments in 360 degrees
 */
-module spiral(radius, radius_min=0, height=0, degrees=360*4, thread_diameter, thread_fn=8, clockwise=true, $fn=10){
+module spiral(radius, radius_min=0, height=0, degrees=360*4, thread_diameter, thread_fn=8, thread_close=false, clockwise=true, $fn=10){
   // Manage input values
   degrees=abs(degrees);
   clockwise_direction = clockwise ? -1 : 1;
@@ -89,6 +90,14 @@ module spiral(radius, radius_min=0, height=0, degrees=360*4, thread_diameter, th
   
   // Draw with path_extrude
   path_extrude(coords, regular_polygon_coords(order=thread_fn, r=thread_diameter/2));
+  
+  // Close the thread with a sphere
+  if (thread_close) {
+    translate(coords[0])
+    sphere(d=thread_diameter, $fn=thread_fn);
+    translate(coords[steps-1])
+    sphere(d=thread_diameter, $fn=thread_fn);
+  }
 }
 
 // Render a single thread to speed up preview

@@ -1,79 +1,28 @@
 /*
-Symbolic Christmas Tree
+Metal trash
+
+Some extra work for a trash icon
+
+Goals I had to overcome:
+- Calculate the path of the spiral (myself)
+- Extruding a geometry along a path (third-party library)
+- Manage quality to avoid long rendering times (a little, but important work)
 */
-use <path_extrude.scad>
+use <../libs/path_extrude.scad>
 
 // Configuration
-tree_base=10;
-tree_height=30;
-tree_turns=4;
-star_height=3;
-
-/*
-Names of coordinate variables for the star
-T: Top
-B: Bottom
-L: Left
-R: Right
-C: Center
-*/
-penthagon=regular_polygon_coords(order=5, r=star_height);
-star_TR=penthagon[0];
-star_TC=penthagon[1];
-star_TL=penthagon[2];
-star_BL=penthagon[3];
-star_BR=penthagon[4];
-big_triangle_TR=[star_TR, star_TL, star_BL];
-big_triangle_TC=[star_TC, star_BL, star_BR];
-big_triangle_TL=[star_TL, star_BR, star_TR];
-big_triangle_BL=[star_BL, star_TR, star_TC];
-big_triangle_BR=[star_BR, star_TC, star_TL];
-
-// The star
-color("yellow")
-translate([0,0,tree_height+star_height])
-rotate([90,0,0]) star();
-
-// The Tree
-color("green")
-spiral(radius=tree_base, height=tree_height, degrees=360*tree_turns, thread_diameter=1, thread_fn=50, thread_close=true, clockwise=true, $fn=100);
-
-module star(){
-  linear_extrude(0.5, center=false, scale=0) star_2D();
-  rotate([0,180,0])
-  linear_extrude(0.5, center=false, scale=0) star_2D();
-}
-
-module star_2D(){
-  rotate([0,0,360/(5*4)]) // Put the head of the star at the top
-  union(){
-    star_center();
-    star_tip();
-    rotate([0,0,360/5]) star_tip();
-    rotate([0,0,360/5*2]) star_tip();
-    rotate([0,0,360/5*3]) star_tip();
-    rotate([0,0,360/5*4]) star_tip();
-  }
-}
-
-module star_tip(){
-  render()
-  difference(){
-    polygon(big_triangle_TR);
-    polygon([star_TC, star_BR, star_BL, star_TL]);
-  }
-}
-
-// The center of the star
-module star_center(){
-  intersection(){
-    polygon(big_triangle_TR);
-    polygon(big_triangle_TC);
-    polygon(big_triangle_TL);
-    polygon(big_triangle_BL);
-    polygon(big_triangle_BR);
-  }
-}
+trash_bottom_diameter=240;
+trash_bottom_radius=trash_bottom_diameter/2;
+trash_bottom_thickness=2;
+trash_bottom_height=20;
+trash_top_diameter=300;
+trash_top_radius=trash_top_diameter/2;
+trash_top_thickness=4;
+trash_height=350;
+threads=50;
+thread_thickness=1;
+intermediate_diameter=((trash_top_diameter-trash_bottom_diameter)*trash_bottom_height)/trash_height+trash_bottom_diameter;
+trash_color=[0.8,0.8,0.8];
 
 // Draw a regular polygon
 module regular_polygon(order=4, r=1){
@@ -150,3 +99,43 @@ module spiral(radius, radius_min=0, height=0, degrees=360*4, thread_diameter, th
     sphere(d=thread_diameter, $fn=thread_fn);
   }
 }
+
+// Render a single thread to speed up preview
+module trash_thread(clockwise=true){
+  render(convexity=10){
+    spiral(
+      radius=(intermediate_diameter-trash_bottom_thickness)/2,
+      radius_min=(trash_top_diameter-trash_bottom_thickness)/2,
+      height=trash_height-trash_bottom_height,
+      thread_diameter=thread_thickness,
+      clockwise=clockwise,
+      degrees=90*2,
+      $fn=50
+    );
+  }
+}
+
+// Bottom
+color(trash_color)
+difference(){
+  cylinder(d1=trash_bottom_diameter,d2=intermediate_diameter,h=trash_bottom_height,$fn=100);
+  translate([0,0,trash_bottom_thickness])
+  cylinder(d1=trash_bottom_diameter-trash_bottom_thickness*2,d2=intermediate_diameter-trash_bottom_thickness*2,h=trash_bottom_height,$fn=100);
+}
+
+// Threads
+color(trash_color)
+translate([0,0,trash_bottom_height])
+for (i = [0:threads-1]) {
+  rotate([0,0,i*(360/threads)])
+  trash_thread(true);
+  rotate([0,0,i*(360/threads)])
+  trash_thread(false);
+}
+
+// Top
+color(trash_color)
+translate([0,0,trash_height])
+rotate_extrude(angle=360, convexity=10, $fn=100)
+translate([trash_top_radius-thread_thickness*2,0,0])
+circle(d=trash_top_thickness, $fn=50);

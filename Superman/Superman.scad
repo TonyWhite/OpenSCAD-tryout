@@ -1,33 +1,37 @@
 /*
-Superman (work in progress)
+Superman logo
+
+Iport DXF with layer
 */
 
-use <unicode.timesu.ttf>
-
-module shape_diamond(){
-  translate([0,-3.1,0])
-  polygon([[0,0],[4,4],[3,5],[-3,5],[-4,4]]);
-}
-
-module shape_red(){
-  union(){
-    difference(){
-      shape_diamond();
-      offset(delta=-0.25)
-      shape_diamond();
-    }
-    translate([0.15,0.05,0])
-    scale([1,0.55,1])
-    text("S", size=6.1, halign="center", valign="center", font="Times");
+module logo_foreground(){
+  color("red")
+  render(convexity=5){
+    linear_extrude(5,convexity=5,scale=0.95)
+    import("Superman-logo.dxf", convexity=5);
   }
 }
 
 
-color("red") shape_red();
+module logo_background(){
+  color("yellow")
+  render(convexity=5){
+    difference(){
+      linear_extrude(5/2,convexity=5)
+      scale([0.92,0.92,1])
+      import("Superman-logo.dxf",layer="Extern");
+      logo_foreground();
+    }
+  }
+}
 
-color("yellow")
-render(convexity=10)
-difference(){
-  shape_diamond();
-  shape_red();
+rotate([90,0,0]){
+  // Front
+  logo_foreground();
+  logo_background();
+  // Back
+  rotate([0,180,0]) {
+    logo_foreground();
+    logo_background();
+  }
 }

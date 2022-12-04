@@ -38,6 +38,23 @@ rotate([90,0,0]) star();
 color("green")
 spiral(radius=tree_base, height=tree_height, degrees=360*tree_turns, thread_diameter=1, thread_fn=50, thread_close=true, clockwise=true, $fn=100);
 
+// Base of the Tree
+color("green")
+union(){
+  rotate_extrude(angle=90*3, convexity=5, $fn=100)
+  translate([tree_base,0,0])
+  circle(d=1,$fn=50);
+  
+  translate([0,-tree_base,0])
+  rotate([0,0,270])
+  rotate_extrude(angle=90*2, convexity=5, $fn=50)
+  difference(){
+    circle(d=1,$fn=50);
+    translate([-0.5,0,0])
+    square(1,center=true);
+  }
+}
+
 module star(){
   linear_extrude(0.5, center=false, scale=0) star_2D();
   rotate([0,180,0])

@@ -1,7 +1,7 @@
 /*
 Metal trash
 
-Some extra work for a trash icon
+Too much work just for an icon
 
 Goals I had to overcome:
 - Calculate the path of the spiral (myself)

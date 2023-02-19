@@ -6,88 +6,49 @@ You can also customize the dice with size, bevel and colors.
 */
 
 dice_size=10;
-dice_bevel=2;
+dice_dot=2;
 dice_color=[0.5,0,0];
 numbers_color=[0,0,0];
 
-module dice_edge(){
-  render(convexity=10){
-    hull(){
-      translate([(dice_size-dice_bevel)/2,0,0]) sphere(d=dice_bevel);
-      translate([-(dice_size-dice_bevel)/2,0,0]) sphere(d=dice_bevel);
-    }
-  }
-}
-
 module dice_numbers(){
   // 1 hole: +Z
-  translate([0,0,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
+  translate([0,0,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
   // 5 holes: -Y
-  rotate([90,0,0]) translate([-dice_bevel*1.2,dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([90,0,0]) translate([dice_bevel*1.2,dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([90,0,0]) translate([0,0,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([90,0,0]) translate([-dice_bevel*1.2,-dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([90,0,0]) translate([dice_bevel*1.2,-dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
+  rotate([90,0,0]) translate([-dice_dot*1.2,dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([90,0,0]) translate([dice_dot*1.2,dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([90,0,0]) translate([0,0,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([90,0,0]) translate([-dice_dot*1.2,-dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([90,0,0]) translate([dice_dot*1.2,-dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
   // 6 holes: -Z
-  rotate([180,0,0]) translate([-dice_bevel*1.2,dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([180,0,0]) translate([0,dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([180,0,0]) translate([dice_bevel*1.2,dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([180,0,0]) translate([-dice_bevel*1.2,-dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([180,0,0]) translate([0,-dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([180,0,0]) translate([dice_bevel*1.2,-dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
+  rotate([180,0,0]) translate([-dice_dot*1.2,dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([180,0,0]) translate([0,dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([180,0,0]) translate([dice_dot*1.2,dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([180,0,0]) translate([-dice_dot*1.2,-dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([180,0,0]) translate([0,-dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([180,0,0]) translate([dice_dot*1.2,-dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
   // 4 holes: +X
-  rotate([0,90,0]) translate([-dice_bevel*1.2,dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([0,90,0]) translate([dice_bevel*1.2,dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([0,90,0]) translate([-dice_bevel*1.2,-dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([0,90,0]) translate([dice_bevel*1.2,-dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
+  rotate([0,90,0]) translate([-dice_dot*1.2,dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([0,90,0]) translate([dice_dot*1.2,dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([0,90,0]) translate([-dice_dot*1.2,-dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([0,90,0]) translate([dice_dot*1.2,-dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
   // 3 holes: -X
-  rotate([0,-90,0]) translate([-dice_bevel*1.2,dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([0,-90,0]) translate([0,0,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([0,-90,0]) translate([dice_bevel*1.2,-dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
+  rotate([0,-90,0]) translate([-dice_dot*1.2,dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([0,-90,0]) translate([0,0,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([0,-90,0]) translate([dice_dot*1.2,-dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
   // 2 holes: +Y
-  rotate([-90,0,0]) translate([-dice_bevel*1.2,dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
-  rotate([-90,0,0]) translate([dice_bevel*1.2,-dice_bevel*1.2,dice_size/2-dice_bevel/8]) cylinder(h=dice_bevel/8,d=dice_bevel);
+  rotate([-90,0,0]) translate([-dice_dot*1.2,dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
+  rotate([-90,0,0]) translate([dice_dot*1.2,-dice_dot*1.2,dice_size/2-dice_dot/8]) cylinder(h=dice_dot/8,d=dice_dot);
 }
 
 module dice(){
   color(dice_color)
-  union(){
-    // Top edges
-    translate([0,0,(dice_size-dice_bevel)/2]){
-      translate([0,(dice_size-dice_bevel)/2,0]) dice_edge();
-      translate([0,-(dice_size-dice_bevel)/2,0]) dice_edge();
-      rotate([0,0,90]) translate([0,(dice_size-dice_bevel)/2,0]) dice_edge();
-      rotate([0,0,90]) translate([0,-(dice_size-dice_bevel)/2,0]) dice_edge();
+  render(convexity=5)
+  difference(){
+    intersection(){
+      cube(dice_size,center=true);
+      sphere(d=dice_size*1.4);
     }
-    // Bottom edges
-    translate([0,0,-(dice_size-dice_bevel)/2]){
-      translate([0,(dice_size-dice_bevel)/2,0]) dice_edge();
-      translate([0,-(dice_size-dice_bevel)/2,0]) dice_edge();
-      rotate([0,0,90]) translate([0,(dice_size-dice_bevel)/2,0]) dice_edge();
-      rotate([0,0,90]) translate([0,-(dice_size-dice_bevel)/2,0]) dice_edge();
-    }
-    // Side edges
-    translate([(dice_size-dice_bevel)/2,(dice_size-dice_bevel)/2,0]) rotate([0,90,0]) dice_edge();
-    translate([(dice_size-dice_bevel)/2,-(dice_size-dice_bevel)/2,0]) rotate([0,90,0]) dice_edge();
-    translate([-(dice_size-dice_bevel)/2,-(dice_size-dice_bevel)/2,0]) rotate([0,90,0]) dice_edge();
-    translate([-(dice_size-dice_bevel)/2,(dice_size-dice_bevel)/2,0]) rotate([0,90,0]) dice_edge();
-    
-    // Faces
-    render(convexity=10){
-      difference(){
-        union(){
-          // Faces on Z
-          linear_extrude(dice_size, center=true) square((dice_size-dice_bevel), center=true);
-          // Faces on Y
-          rotate([90,0,0]) linear_extrude(dice_size, center=true) square((dice_size-dice_bevel), center=true);
-          // Faces on X
-          rotate([0,90,0]) linear_extrude(dice_size, center=true) square((dice_size-dice_bevel), center=true);
-        }
-        
-        // Holes for numbers
-        dice_numbers();
-      }
-    }
+    dice_numbers();
   }
   color(numbers_color) dice_numbers();
 }

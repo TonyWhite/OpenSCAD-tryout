@@ -25,6 +25,7 @@ module logo_background(){
   }
 }
 
+$fn=100;
 rotate([90,0,0]){
   // Front
   logo_foreground();

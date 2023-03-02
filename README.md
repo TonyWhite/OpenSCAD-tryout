@@ -1,5 +1,5 @@
 # OpenSCAD tryout
-Simply test drawings
+Simply test drawings with OpenSCAD, then playing with Blender.
 
 ## Genesa
 ![Genesa](Genesa/Genesa%20-%20render.png)

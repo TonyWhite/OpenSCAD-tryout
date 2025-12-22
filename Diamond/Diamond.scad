@@ -52,7 +52,7 @@ translate([0,0,radious])
 union() {
   // Bottom
   rotate([0,180,0])
-  linear_extrude(height=1,scale=0)
+  linear_extrude(height=radious,scale=0)
   regular_polygon(order=edges,r=radious);
 
   // Top
@@ -61,10 +61,10 @@ union() {
     polyhedron(points=regular_polygon_coords(order=edges,r=radious),faces=[[0,1,2,3,4,5]]);
     
     // Little hexagon
-    translate([0,0,0.5])
     apothem = 2 * radious * SIN(PI/edges);
     edge = 2 * apothem * TAN(PI/edges);
     little_radious = (edge / (2 * SIN(PI/edges))) / 2;
+    translate([0,0,radious/2])
     rotate([0,0,360/12])
     polyhedron(points=regular_polygon_coords(order=edges,r=little_radious),faces=[[0,1,2,3,4,5]]);
   }

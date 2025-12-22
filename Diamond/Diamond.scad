@@ -36,7 +36,7 @@ function polygon_edge(edges=undef, radious=undef, apothem=undef, /*edge=undef,*/
     if (area!=undef) undef
 ];
 
-/* Trigonometry and radians */
+/* Trigonometry with radians */
 function RAD_TO_DEG(radians=undef) = radians * (180/PI);
 function SIN(n=undef) = sin(RAD_TO_DEG(n));
 function COS(n=undef) = cos(RAD_TO_DEG(n));

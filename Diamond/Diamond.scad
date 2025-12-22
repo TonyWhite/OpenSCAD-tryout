@@ -11,8 +11,11 @@ module regular_polygon(order=4, r=1){
 }
 
 // Give the coordinates of a regular polygon
-function regular_polygon_coords(order=4, r=1) =
-  [ for (th=[ for (i = [0:order-1]) i*(360/order) ]) [r*cos(th), r*sin(th)] ];
+function regular_polygon_coords(order=4, r=1) = [
+  for (th=[
+    for (i = [0:order-1]) i*(360/order)
+  ]) [r*cos(th), r*sin(th)]
+];
 
 /*
   Give the length of the edge of a regular polygon

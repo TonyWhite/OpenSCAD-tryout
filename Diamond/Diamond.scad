@@ -17,6 +17,10 @@ function regular_polygon_coords(order=4, r=1) = [
   ]) [r*cos(th), r*sin(th)]
 ];
 
+function define_faces(n=6) = [[
+  for (i = [0 : n-1]) i
+]];
+
 /*
   Give the length of the edge of a regular polygon
   Requires at least two parameters
@@ -61,14 +65,14 @@ union() {
   // Top
   hull() {
     // Big hexagon
-    polyhedron(points=regular_polygon_coords(order=edges,r=radious),faces=[[0,1,2,3,4,5]]);
+    polyhedron(points=regular_polygon_coords(order=edges,r=radious),faces=define_faces(edges));
     
     // Little hexagon
     apothem = 2 * radious * SIN(PI/edges);
     edge = 2 * apothem * TAN(PI/edges);
     little_radious = (edge / (2 * SIN(PI/edges))) / 2;
     translate([0,0,radious/2])
-    rotate([0,0,360/12])
-    polyhedron(points=regular_polygon_coords(order=edges,r=little_radious),faces=[[0,1,2,3,4,5]]);
+    rotate([0,0,360/(edges*2)])
+    polyhedron(points=regular_polygon_coords(order=edges,r=little_radious),faces=define_faces(edges));
   }
 }

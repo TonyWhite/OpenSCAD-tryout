@@ -22,7 +22,7 @@ function regular_polygon_coords(order=4, r=1) =
 function polygon_edge(edges=undef, radious=undef, apothem=undef, /*edge=undef,*/ perimeter=undef, area=undef) = [
   if (edges!=undef)
     if (radious!=undef) undef
-    else if (apothem!=undef) 2*apothem*tan(PI/edges)
+    else if (apothem!=undef) 2*apothem*TAN(PI/edges)
     else if (perimeter!=undef) undef
     else if (area!=undef) undef
   else if(radious!=undef)
@@ -36,12 +36,16 @@ function polygon_edge(edges=undef, radious=undef, apothem=undef, /*edge=undef,*/
     if (area!=undef) undef
 ];
 
-// SOME WARNING AND UNDEFINED RESULTS
-function rad_to_deg(rad=undef) = [
-  rad * (180/PI)
-];
+/* Trigonometry and radians */
+function RAD_TO_DEG(radians=undef) = radians * (180/PI);
+function SIN(n=undef) = sin(RAD_TO_DEG(n));
+function COS(n=undef) = cos(RAD_TO_DEG(n));
+function TAN(n=undef) = tan(RAD_TO_DEG(n));
+function ACOS(n=undef) = acos(RAD_TO_DEG(n));
+function ASIN(n=undef) = asin(RAD_TO_DEG(n));
+function ATAN(n=undef) = atan(RAD_TO_DEG(n));
+function ATAN2(n=undef) = atan2(RAD_TO_DEG(n));
 
-function sin_RAD(n=undef) = sin(rad_to_deg(n));
 
 color("#ffff99")
 translate([0,0,radious])
@@ -57,11 +61,10 @@ union() {
     polyhedron(points=regular_polygon_coords(order=edges,r=radious),faces=[[0,1,2,3,4,5]]);
     
     // Little hexagon
-    apothem = 2 * radious * sin_RAD(PI/edges);
-    echo(apothem);
-    edge = 2 * apothem * tan(PI/edges);
-    little_radious = edge / (2 * sin(PI/edges));
     translate([0,0,0.5])
+    apothem = 2 * radious * SIN(PI/edges);
+    edge = 2 * apothem * TAN(PI/edges);
+    little_radious = (edge / (2 * SIN(PI/edges))) / 2;
     rotate([0,0,360/12])
     polyhedron(points=regular_polygon_coords(order=edges,r=little_radious),faces=[[0,1,2,3,4,5]]);
   }

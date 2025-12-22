@@ -58,7 +58,7 @@ color("#ffff99")
 translate([0,0,radious])
 union() {
   // Bottom
-  rotate([0,180,0])
+  rotate([0,180,180])
   linear_extrude(height=radious,scale=0)
   regular_polygon(order=edges,r=radious);
 
@@ -71,6 +71,7 @@ union() {
     apothem = 2 * radious * SIN(PI/edges);
     edge = 2 * apothem * TAN(PI/edges);
     little_radious = (edge / (2 * SIN(PI/edges))) / 2;
+    
     translate([0,0,radious/2])
     rotate([0,0,360/(edges*2)])
     polyhedron(points=regular_polygon_coords(order=edges,r=little_radious),faces=define_faces(edges));
